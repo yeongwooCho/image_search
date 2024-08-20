@@ -5,7 +5,12 @@ import 'package:image_search/ui/widget/photo_widget.dart';
 import '../model/photo.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final PixabayApi api;
+
+  const HomeScreen({
+    super.key,
+    required this.api,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -15,8 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final _controller = TextEditingController();
 
   final List<Photo> _photos = [];
-
-  final api = PixabayApi();
 
   @override
   void dispose() {
@@ -52,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 suffixIcon: IconButton(
                   onPressed: () async {
-                    final photos = await api.fetch(_controller.text);
+                    final photos = await widget.api.fetch(_controller.text);
 
                     _photos.clear();
                     _photos.addAll([...photos]);

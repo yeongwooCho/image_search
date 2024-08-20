@@ -97,4 +97,5 @@ class Photo {
     _data['userImageURL'] = userImageURL;
     return _data;
   }
+
 }
